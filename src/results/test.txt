@@ -1,0 +1,4 @@
+[-13805,3724,3945,5371,16190]
+ Quatidade de comparacoes: 2
+ Quatidade de movimentacoes: 5
+ Tempo gasto na execucao: null
