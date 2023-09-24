@@ -36,4 +36,10 @@ public class WriteFile {
         printLine.close();
 
     }
+    public static void  writeIndex(int index) throws IOException {
+        FileWriter writer = new FileWriter("src/data/filesIndex.txt", APPEND_TO_FILE);
+        PrintWriter printLine = new PrintWriter(writer);
+        writer.append(String.valueOf(index));
+        printLine.close();
+    }
 }

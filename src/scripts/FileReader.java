@@ -1,18 +1,15 @@
 package src.scripts;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.LinkedList;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TextFileReader {
+public class FileReader {
     LinkedList<Integer> lista = new LinkedList<Integer>();
 
     public LinkedList<Integer> read(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
             String Int_line;
             Pattern pattern = Pattern.compile("-?\\d+");
             while ((Int_line = reader.readLine()) != null) {
@@ -29,6 +26,17 @@ public class TextFileReader {
         } catch (Exception e) {
             System.out.println("error");
             return null;
+        }
+    }
+
+    public static int readIndex(){
+        try(BufferedReader reader = new BufferedReader(new java.io.FileReader("src/data/filesIndex.txt"))){
+          String int_line;
+          int_line = reader.readLine();
+          return Integer.parseInt(int_line);
+        }catch (Exception e){
+            System.out.println("error");
+            return Integer.parseInt(null);
         }
     }
 }

@@ -14,7 +14,7 @@ public class DeltaTime implements Runnable {
         startTime = System.currentTimeMillis();
     }
 
-    private static String finish() {
+    public static String finish() {
         long endTime = System.currentTimeMillis();
         long elapsedTimeTimeInMillis = endTime - startTime;
         long horas = elapsedTimeTimeInMillis / 3600000;
@@ -30,8 +30,9 @@ public class DeltaTime implements Runnable {
     }
 
     public static String elapsedTime() {
-        ClearConsole.clearConsole();
+        // ClearConsole.clearConsole();
         String time = "Elapsedtime: " + finish();
+        DeltaTime.elapsedTime = time;
         return time;
     }
 
