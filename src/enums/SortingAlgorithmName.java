@@ -2,12 +2,16 @@ package src.enums;
 
 import java.util.LinkedList;
 
+import src.algorithms.InsertionSort;
 import src.algorithms.QuickSort;
 import src.algorithms.QuickSortRandom;
 
 public enum SortingAlgorithmName {
     VOID_QUICK_SORT {
-
+        @Override
+        public String algorithmName(){
+            return "QUICK_SORT";
+        }
         @Override
         public LinkedList<Integer> useAlgorithm(LinkedList<Integer> list) {
             QuickSort sort = new QuickSort();
@@ -23,14 +27,24 @@ public enum SortingAlgorithmName {
             return sort.sort(list);
         }
 
+        @Override
+        public String algorithmName() {
+            return null;
+        }
+
     },
     VOID_INSERTION_SORT {
         @Override
         public LinkedList<Integer> useAlgorithm(LinkedList<Integer> list) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'chooseAlgorithm'");
+            InsertionSort sort = new InsertionSort();
+            return sort.sort(list);
+        }
+
+        @Override
+        public String algorithmName() {
+            return null;
         }
     };
-
     public abstract LinkedList<Integer> useAlgorithm(LinkedList<Integer> list);
+    public abstract  String algorithmName();
 }
