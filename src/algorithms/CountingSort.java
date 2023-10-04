@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class CountingSort implements SortingAlgorithm {
 
     @Override
-    public LinkedList<Integer> sort(LinkedList<Integer> lista) {
+    public LinkedList<Long> sort(LinkedList<Long> lista) {
 
 
         return null;

@@ -12,7 +12,7 @@ import src.time.DeltaTime;
 public class WriteFile {
     private static final boolean APPEND_TO_FILE = false;
 
-    public static void writeToFile(LinkedList<Integer> list) throws IOException {
+    public static void writeToFile(LinkedList<Long> list) throws IOException {
 
         FileWriter writer = new FileWriter(CreateFile.getFile().getAbsolutePath(),APPEND_TO_FILE);
         PrintWriter printLine = new PrintWriter(writer);

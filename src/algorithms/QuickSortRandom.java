@@ -7,7 +7,7 @@ import src.controller.Comparacoes;
 import src.controller.Movimentacoes;
 
 public class QuickSortRandom implements SortingAlgorithm {
-    private LinkedList<Integer> list = new LinkedList<Integer>();
+    private LinkedList<Long> list = new LinkedList<Long>();
 
     public void quickSortHelper(int left, int right) {
         if (left < right) {
@@ -16,7 +16,7 @@ public class QuickSortRandom implements SortingAlgorithm {
             Random random = new Random();
             int pivotIndex = left + random.nextInt((right - left) + 1);
 
-            int pivot = this.list.get(pivotIndex);
+            long pivot = this.list.get(pivotIndex);
 
             Movimentacoes.movimentou();
             this.list.set(pivotIndex, this.list.get(right));
@@ -42,13 +42,13 @@ public class QuickSortRandom implements SortingAlgorithm {
 
     private void swap(int i, int j) {
         Movimentacoes.movimentou();
-        int temp = this.list.get(i);
+        long temp = this.list.get(i);
         this.list.set(i, this.list.get(j));
         this.list.set(j, temp);
     }
 
     @Override
-    public LinkedList<Integer> sort(LinkedList<Integer> list) {
+    public LinkedList<Long> sort(LinkedList<Long> list) {
         this.list = list;
         quickSortHelper(0, this.list.size() - 1);
         return this.list;

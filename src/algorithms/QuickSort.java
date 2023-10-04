@@ -6,7 +6,7 @@ import src.controller.Comparacoes;
 import src.controller.Movimentacoes;
 
 public class QuickSort implements SortingAlgorithm {
-    private LinkedList<Integer> list = new LinkedList<Integer>();
+    private LinkedList<Long> list = new LinkedList<Long>();
 
     private void quickSortHelper(int left, int right) {
         if (left < right) {
@@ -17,7 +17,7 @@ public class QuickSort implements SortingAlgorithm {
     }
 
     private int partition(int left, int right) {
-        int pivot = this.list.get(right);
+        long pivot = this.list.get(right);
         int i = left - 1;
 
         for (int j = left; j < right; j++) {
@@ -34,13 +34,13 @@ public class QuickSort implements SortingAlgorithm {
 
     private void swap(int i, int j) {
         Movimentacoes.movimentou();
-        int temp = this.list.get(i);
+        long temp = this.list.get(i);
         this.list.set(i, this.list.get(j));
         this.list.set(j, temp);
     }
 
     @Override
-    public LinkedList<Integer> sort(LinkedList<Integer> lista) {
+    public LinkedList<Long> sort(LinkedList<Long> lista) {
         this.list = lista;
         quickSortHelper(0, list.size() - 1);
         return this.list;

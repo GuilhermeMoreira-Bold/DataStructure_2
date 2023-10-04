@@ -6,9 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileReader {
-    LinkedList<Integer> lista = new LinkedList<Integer>();
+    LinkedList<Long> lista = new LinkedList<Long>();
 
-    public LinkedList<Integer> read(String filePath) {
+    public LinkedList<Long> read(String filePath) {
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
             String Int_line;
             Pattern pattern = Pattern.compile("-?\\d+");
@@ -16,7 +16,7 @@ public class FileReader {
                 Matcher matcher = pattern.matcher(Int_line);
                 while (matcher.find()) {
                     String numeroStr = matcher.group();
-                    int numero = Integer.parseInt(numeroStr);
+                    long numero = Integer.parseInt(numeroStr);
                     lista.add(numero);
                 }
             }

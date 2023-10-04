@@ -3,6 +3,7 @@ package src;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import src.binary.Binary;
 import src.controller.TimeController;
 import src.enums.SortingAlgorithmName;
 import src.scripts.CreateFile;
@@ -15,8 +16,7 @@ import src.time.DeltaTime;
 public class app {
     public static void main(String[] args) throws IOException {
 
-        ordenar(SortingAlgorithmName.VOID_QUICK_SORT, 5);
-
+        ordenar(SortingAlgorithmName.VOID_RADIX_SORT_BINARY, 500000);
 
     }
     public static void ordenar(SortingAlgorithmName sorting,Integer size) throws IOException {
@@ -34,7 +34,7 @@ public class app {
 
         FileReader text = new FileReader();
 
-        LinkedList<Integer> lista = new LinkedList<Integer>();
+        LinkedList<Long> lista = new LinkedList<Long>();
 
         if(!file.containsKey(size)){
             throw new RuntimeException("Size don't exist");
@@ -42,7 +42,7 @@ public class app {
         lista = text.read("src/data/casos/aleatorio/" + file.get(size) + ".txt");
 
         DeltaTime.start();
-        LinkedList<Integer> listaOrdenada = sorting.useAlgorithm(lista);
+        LinkedList<Long> listaOrdenada = sorting.useAlgorithm(lista);
         DeltaTime.elapsedTime();
 
         CreateFile.createFile(file.get(size) +"_"+ sorting.algorithmName()+"_");

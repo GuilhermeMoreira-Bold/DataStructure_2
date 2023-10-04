@@ -3,5 +3,5 @@ package src.algorithms;
 import java.util.LinkedList;
 
 public interface SortingAlgorithm {
-    LinkedList<Integer> sort(LinkedList<Integer> lista);
+    LinkedList<Long> sort(LinkedList<Long> lista);
 }
