@@ -16,7 +16,7 @@ import src.time.DeltaTime;
 public class app {
     public static void main(String[] args) throws IOException {
 
-        ordenar(SortingAlgorithmName.VOID_RADIX_SORT_BINARY, 500000);
+        ordenar(SortingAlgorithmName.VOID_RADIX_SORT_BINARY, 1000002);
 
     }
     public static void ordenar(SortingAlgorithmName sorting,Integer size) throws IOException {
@@ -30,6 +30,8 @@ public class app {
         file.put(1000, "dados1000");
         file.put(100, "dados100");
         file.put(100000, "dados100_mil");
+        file.put(1000001, "100_mil_inverso");
+        file.put(1000002, "100_mil_ordenado");
         file.put(500000, "dados500_mil");
 
         FileReader text = new FileReader();
@@ -39,7 +41,7 @@ public class app {
         if(!file.containsKey(size)){
             throw new RuntimeException("Size don't exist");
         }
-        lista = text.read("src/data/casos/aleatorio/" + file.get(size) + ".txt");
+        lista = text.read("src/data/casos/ordenado/" + file.get(size) + ".txt");
 
         DeltaTime.start();
         LinkedList<Long> listaOrdenada = sorting.useAlgorithm(lista);

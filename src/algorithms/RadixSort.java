@@ -1,6 +1,7 @@
 package src.algorithms;
 
 import src.binary.Binary;
+import src.controller.Movimentacoes;
 
 import java.util.LinkedList;
 
@@ -30,10 +31,12 @@ public class RadixSort implements SortingAlgorithm{
 
             for (String number : newOrders) {
                 if (number.charAt(i) == '0') {
+                    Movimentacoes.movimentou();
                     bucketZero.add(number);
-                } else {
-                    bucketOne.add(number);
+                    continue;
                 }
+                    bucketOne.add(number);
+                    Movimentacoes.movimentou();
             }
 
             newOrders.clear();
@@ -47,16 +50,13 @@ public class RadixSort implements SortingAlgorithm{
     @Override
     public LinkedList<Long> sort(LinkedList<Long> lista) {
         LinkedList<Long> positiveDecimal = new LinkedList<>();
-        LinkedList<Long> negativeDecimal = new LinkedList<>();
 
 
         radixHelper(Binary.list(lista));
-        LinkedList<Long> list = new LinkedList<>(radixDistribute(positive, 63));
-        negativeDecimal = radixDistribute(negative, 63);
+        LinkedList<Long> list = new LinkedList<>(radixDistribute(negative, 63));
+        positiveDecimal = radixDistribute(positive, 63);
 
-        for(int i = negativeDecimal.size() -1; i > 0; i--){
-            list.add(negativeDecimal.get(i));
-        }
+        list.addAll(positiveDecimal);
 
         return list;
     }
