@@ -7,31 +7,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class RadixSort implements SortingAlgorithm<Long>{
-    private ArrayList<Long> positive = new ArrayList<>();
-    private ArrayList<Long> negative = new ArrayList<>();
+public class RadixSortInteger implements SortingAlgorithm<Integer>{
+    private ArrayList<Integer> positive = new ArrayList<>();
+    private ArrayList<Integer> negative = new ArrayList<>();
 
-    private void radixHelper(LinkedList<Long> list) {
-        for (Long number : list) {
+    private void radixHelper(LinkedList<Integer> list) {
+        for (Integer number : list) {
             if (number >= 0) {
                 positive.add(number);
             } else {
-                long complement = ~number + 1;
+                int complement = ~number + 1;
                 negative.add(complement);
             }
         }
     }
 
-    private ArrayList<Long> radixDistribute(ArrayList<Long> list, int bitIndex) {
+    private ArrayList<Integer> radixDistribute(ArrayList<Integer> list, int bitIndex) {
         if (list.isEmpty() || bitIndex < 0) {
             return list;
         }
 
-        ArrayList<Long> bucketZero = new ArrayList<>();
-        ArrayList<Long> bucketOne = new ArrayList<>();
+        ArrayList<Integer> bucketZero = new ArrayList<>();
+        ArrayList<Integer> bucketOne = new ArrayList<>();
 
-        for (Long number : list) {
-            long mask = 1L << bitIndex;
+        for (Integer number : list) {
+            int mask = 1 << bitIndex;
             if ((number & mask) == 0) {
                 bucketZero.add(number);
                 Movimentacoes.movimentou();
@@ -41,7 +41,7 @@ public class RadixSort implements SortingAlgorithm<Long>{
             }
         }
 
-        ArrayList<Long> newOrders = new ArrayList<>();
+        ArrayList<Integer> newOrders = new ArrayList<>();
         newOrders.addAll(radixDistribute(bucketZero, bitIndex - 1));
         newOrders.addAll(radixDistribute(bucketOne, bitIndex - 1));
 
@@ -49,20 +49,19 @@ public class RadixSort implements SortingAlgorithm<Long>{
     }
 
     @Override
-    public LinkedList<Long> sort(LinkedList<Long> lista) {
+    public LinkedList<Integer> sort(LinkedList<Integer> lista) {
         if (lista == null) {
             throw new IllegalArgumentException("A lista de entrada não pode ser nula.");
         }
 
         radixHelper(lista);
 
-        ArrayList<Long> sortedList = new ArrayList<>(lista.size());
-        sortedList.addAll(radixDistribute(negative, 63));
+        ArrayList<Integer> sortedList = new ArrayList<>(lista.size());
+        sortedList.addAll(radixDistribute(negative, 31));
         Collections.reverse(sortedList);
-        sortedList.addAll(radixDistribute(positive, 63));
+        sortedList.addAll(radixDistribute(positive, 31));
 
-        LinkedList<Long> result = new LinkedList<>(sortedList);
-
+        LinkedList<Integer> result = new LinkedList<>(sortedList);
 
         for (int i = 0; i < negative.size(); i++) {
             result.set(i, ~result.get(i) + 1);

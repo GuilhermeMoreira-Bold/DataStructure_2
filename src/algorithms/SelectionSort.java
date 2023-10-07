@@ -2,7 +2,7 @@ package src.algorithms;
 
 import java.util.LinkedList;
 
-public class SelectionSort implements SortingAlgorithm{
+public class SelectionSort implements SortingAlgorithm<Long>{
     public LinkedList<Long> slectionHelper(LinkedList<Long> list){
             int lowestIndex;
             for(int i = 0; i < list.size(); i ++){

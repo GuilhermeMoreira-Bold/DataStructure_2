@@ -2,7 +2,7 @@ package src.algorithms;
 
 import java.util.LinkedList;
 
-public class InsertionSort implements  SortingAlgorithm{
+public class InsertionSort implements  SortingAlgorithm<Long>{
 
     private LinkedList<Long> insertionSortHelper(LinkedList<Long> list){
         for(int j = 2;j <  list.size(); j++){

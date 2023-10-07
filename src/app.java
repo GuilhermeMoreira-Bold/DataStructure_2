@@ -16,10 +16,10 @@ import src.time.DeltaTime;
 public class app {
     public static void main(String[] args) throws IOException {
 
-        ordenar(SortingAlgorithmName.VOID_RADIX_SORT_BINARY, 1000002);
+        ordenar(SortingAlgorithmName.VOID_RADIX_ORIGINAL, 500000, "Long");
 
     }
-    public static void ordenar(SortingAlgorithmName sorting,Integer size) throws IOException {
+    public static void ordenar(SortingAlgorithmName sorting,Integer size, String estruturaName) throws IOException {
 
         HashMap<Integer, String> file = new HashMap<Integer, String>();
 
@@ -34,14 +34,18 @@ public class app {
         file.put(1000002, "100_mil_ordenado");
         file.put(500000, "dados500_mil");
 
+        HashMap<String, Integer> estrutura = new HashMap<>();
+        estrutura.put("Integer",1);
+        estrutura.put("Long", 2);
+
         FileReader text = new FileReader();
 
         LinkedList<Long> lista = new LinkedList<Long>();
 
-        if(!file.containsKey(size)){
+        if(!file.containsKey(size) && estrutura.containsKey(estruturaName)){
             throw new RuntimeException("Size don't exist");
         }
-        lista = text.read("src/data/casos/ordenado/" + file.get(size) + ".txt");
+        lista = text.read("src/data/casos/aleatorio/" + file.get(size) + ".txt", estrutura.get(estruturaName));
 
         DeltaTime.start();
         LinkedList<Long> listaOrdenada = sorting.useAlgorithm(lista);

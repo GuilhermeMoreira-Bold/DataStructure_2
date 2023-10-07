@@ -1,14 +1,15 @@
 package src.scripts;
 
 import java.io.BufferedReader;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FileReader {
-    LinkedList<Long> lista = new LinkedList<Long>();
+public class FileReader<T extends Comparable<T>> {
+    LinkedList<T> lista = new LinkedList<>();
 
-    public LinkedList<Long> read(String filePath) {
+    public LinkedList<T> read(String filePath, int tipoDaEstruturaDedados) {
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
             String Int_line;
             Pattern pattern = Pattern.compile("-?\\d+");
@@ -16,7 +17,7 @@ public class FileReader {
                 Matcher matcher = pattern.matcher(Int_line);
                 while (matcher.find()) {
                     String numeroStr = matcher.group();
-                    long numero = Integer.parseInt(numeroStr);
+                    T numero = (T) parseNumber(numeroStr, tipoDaEstruturaDedados);
                     lista.add(numero);
                 }
             }
@@ -26,6 +27,16 @@ public class FileReader {
         } catch (Exception e) {
             System.out.println("error");
             return null;
+        }
+    }
+    private T  parseNumber(String parseNumber, int estruturaNumber){
+        if(estruturaNumber == 1){
+            return  (T) Integer.valueOf(parseNumber);
+        }
+        if(estruturaNumber == 2) {
+            return (T) Long.valueOf(parseNumber);
+        }else {
+             throw new RuntimeException("Data structure doesn't exist");
         }
     }
 

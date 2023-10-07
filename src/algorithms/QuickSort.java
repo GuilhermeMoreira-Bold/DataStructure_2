@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import src.controller.Comparacoes;
 import src.controller.Movimentacoes;
 
-public class QuickSort implements SortingAlgorithm {
+public class QuickSort implements SortingAlgorithm<Long> {
     private LinkedList<Long> list = new LinkedList<Long>();
 
     private void quickSortHelper(int left, int right) {

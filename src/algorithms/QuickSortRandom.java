@@ -6,7 +6,7 @@ import java.util.Random;
 import src.controller.Comparacoes;
 import src.controller.Movimentacoes;
 
-public class QuickSortRandom implements SortingAlgorithm {
+public class QuickSortRandom implements SortingAlgorithm<Long> {
     private LinkedList<Long> list = new LinkedList<Long>();
 
     public void quickSortHelper(int left, int right) {
