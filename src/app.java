@@ -16,7 +16,7 @@ import src.time.DeltaTime;
 public class app {
     public static void main(String[] args) throws IOException {
 
-        ordenar(SortingAlgorithmName.VOID_RADIX_ORIGINAL, 500000, "Long");
+        ordenar(SortingAlgorithmName.VOID_RADIX_SORT_BINARY, 5000001, "Long");
 
     }
     public static void ordenar(SortingAlgorithmName sorting,Integer size, String estruturaName) throws IOException {
@@ -33,6 +33,7 @@ public class app {
         file.put(1000001, "100_mil_inverso");
         file.put(1000002, "100_mil_ordenado");
         file.put(500000, "dados500_mil");
+        file.put(5000001, "500mil_positivos");
 
         HashMap<String, Integer> estrutura = new HashMap<>();
         estrutura.put("Integer",1);

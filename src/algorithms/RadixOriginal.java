@@ -2,69 +2,51 @@ package src.algorithms;
 
 import src.controller.Movimentacoes;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class RadixOriginal implements SortingAlgorithm<Long> {
 
-    private void countSort(LinkedList<Long> lista, long exp) {
-        int n = lista.size();
-        ArrayList<Long> output = new ArrayList<>(n);
+    public static void radixSort(long[] arr) {
+        long max = Arrays.stream(arr).max().orElse(0);
+        for (long exp = 1; max / exp > 0; exp *= 10) {
+            countingSort(arr, exp);
+        }
+    }
+
+    private static void countingSort(long[] arr, long exp) {
+        int n = arr.length;
+        long[] output = new long[n];
+        long[] count = new long[10];
+
         for (int i = 0; i < n; i++) {
-            output.add(0L);
+            count[(int) ((arr[i] / exp) % 10)]++;
         }
 
-        int[] count = new int[10];
-        for (int i = 0; i < 10; i++) {
-            count[i] = 0;
-        }
-
-        // Count occurrences of digits at the current exp position
-        for (Long num : lista) {
-            int digit = Math.floorMod((int) ((num / exp) % 10), 10);
-            count[digit]++;
-        }
-
-        // Update count[i] to store the position of the current digit in the output array
         for (int i = 1; i < 10; i++) {
             count[i] += count[i - 1];
         }
 
-        // Build the output array in a stable manner
         for (int i = n - 1; i >= 0; i--) {
-            Long num = lista.get(i);
-            int digit = Math.floorMod((int) ((num / exp) % 10), 10);
-            output.set(count[digit] - 1, num);
+            output[(int) (count[(int) ((arr[i] / exp) % 10)] - 1)] = arr[i];
+            count[(int) ((arr[i] / exp) % 10)]--;
             Movimentacoes.movimentou();
-            count[digit]--;
         }
 
-        // Copy the output array back to the original list
-        for (int i = 0; i < n; i++) {
-            lista.set(i, output.get(i));
-        }
-    }
-
-    private long getMax(LinkedList<Long> lista) {
-        long max = lista.getFirst();
-        for (Long num : lista) {
-            if (num > max) {
-                max = num;
-            }
-        }
-        return max;
+        System.arraycopy(output, 0, arr, 0, n);
     }
 
     @Override
     public LinkedList<Long> sort(LinkedList<Long> lista) {
-        long max = getMax(lista);
-
-        int numDigits = (int) (Math.log10(max) + 1);
-
-        for (int exp = 1; exp <= Math.pow(10, numDigits); exp *= 10) {
-            countSort(lista, exp);
+        long[] numbers = new long[lista.size()];
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = lista.get(i);
         }
-
-        return lista;
+        radixSort(numbers);
+        LinkedList<Long> sortedList = new LinkedList<>();
+        for (long number : numbers) {
+            sortedList.add(number);
+        }
+        return sortedList;
     }
 }
