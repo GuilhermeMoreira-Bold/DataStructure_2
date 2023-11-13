@@ -2,8 +2,8 @@ package src.enums;
 
 import java.util.Comparator;
 import java.util.LinkedList;
-
 import src.algorithms.*;
+
 
 public enum SortingAlgorithmName {
     VOID_QUICK_SORT {

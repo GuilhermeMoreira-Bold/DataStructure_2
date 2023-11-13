@@ -1,6 +1,5 @@
 package src.algorithms;
 
-import src.binary.Binary;
 import src.controller.Movimentacoes;
 
 import java.util.ArrayList;

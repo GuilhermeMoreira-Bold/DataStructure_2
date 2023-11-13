@@ -3,7 +3,6 @@ package src;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import src.binary.Binary;
 import src.controller.TimeController;
 import src.enums.SortingAlgorithmName;
 import src.scripts.CreateFile;
