@@ -5,8 +5,16 @@ import java.util.Queue;
 
 public class BinarySearchTree {
 
-
     private NodeTree root;
+    public NodeTree getRoot() {
+        return root;
+    }
+
+    public void deleteAllElements(){
+        root.rightChild = null;
+        root.leftChild = null;
+        root = null;
+    }
 
     public BinarySearchTree() {
         this.root = null;
@@ -157,10 +165,11 @@ public class BinarySearchTree {
         Queue<NodeTree> queue = new LinkedList<>();
         queue.add(root);
 
+
         while (!queue.isEmpty()) {
             NodeTree current = queue.poll();
             System.out.print(current.data + " ");
-
+                
             if (current.leftChild != null) {
                 queue.add(current.leftChild);
             }
@@ -168,6 +177,15 @@ public class BinarySearchTree {
             if (current.rightChild != null) {
                 queue.add(current.rightChild);
             }
+
         }
+
+    }
+
+    @Override
+    public String toString() {
+        return "BinarySearchTree{" +
+                "root=" + root +
+                '}' + "Node" + root.toString();
     }
 }

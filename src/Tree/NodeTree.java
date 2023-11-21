@@ -12,4 +12,11 @@ public class NodeTree {
         this.leftChild = null;
         this.rightChild = null;
     }
+
+    @Override
+    public String toString() {
+        return "NodeTree{" +
+                "data=" + data +
+                '}';
+    }
 }
