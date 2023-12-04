@@ -15,8 +15,7 @@ public class RadixSort implements SortingAlgorithm<Long>{
             if (number >= 0) {
                 positive.add(number);
             } else {
-                long complement = ~number + 1;
-                negative.add(complement);
+                negative.add(number);
             }
         }
     }
@@ -33,10 +32,10 @@ public class RadixSort implements SortingAlgorithm<Long>{
             long mask = 1L << bitIndex;
             if ((number & mask) == 0) {
                 bucketZero.add(number);
-                Movimentacoes.movimentou();
+//                Movimentacoes.movimentou();
             } else {
                 bucketOne.add(number);
-                Movimentacoes.movimentou();
+//                Movimentacoes.movimentou();
             }
         }
 
@@ -57,15 +56,12 @@ public class RadixSort implements SortingAlgorithm<Long>{
 
         ArrayList<Long> sortedList = new ArrayList<>(lista.size());
         sortedList.addAll(radixDistribute(negative, 63));
-        Collections.reverse(sortedList);
         sortedList.addAll(radixDistribute(positive, 63));
 
         LinkedList<Long> result = new LinkedList<>(sortedList);
 
 
-        for (int i = 0; i < negative.size(); i++) {
-            result.set(i, ~result.get(i) + 1);
-        }
+
 
         return result;
     }

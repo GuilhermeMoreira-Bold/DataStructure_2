@@ -2,6 +2,8 @@ package src.enums;
 
 import java.util.Comparator;
 import java.util.LinkedList;
+
+import src.Tree.AVLTree;
 import src.algorithms.*;
 
 
@@ -17,6 +19,33 @@ public enum SortingAlgorithmName {
             return ((LinkedList<T>) sort.sort((LinkedList<Long>) list));
         }
 
+    },
+    VOID_NEW_RADIX{
+        @Override
+        public <T> LinkedList<T> useAlgorithm(LinkedList<T> list) {
+            RadixSort2 sort = new RadixSort2();
+            return ((LinkedList<T>) sort.sort((LinkedList<Long>) list));
+        }
+
+        @Override
+        public String algorithmName() {
+            return "NEW_RADIX";
+        }
+    },
+    VOID_AVL_TREE{
+        @Override
+        public <T> LinkedList<T> useAlgorithm(LinkedList<T> list) {
+            AVLTree<Long> avl = new AVLTree<>();
+            for(int i = 0; i < list.size(); i ++){
+                avl.insert((Long) list.get(i));
+            }
+            return ((LinkedList<T>) avl.sort((LinkedList<Long>) list));
+        }
+
+        @Override
+        public String algorithmName() {
+            return "AVL";
+        }
     },
     VOID_QUICK_SORT_RANDOM {
 

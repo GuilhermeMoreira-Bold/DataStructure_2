@@ -1,0 +1,4 @@
+[]
+ Quatidade de comparacoes: 0
+ Quatidade de movimentacoes: 0
+ Tempo gasto na execucao: Elapsedtime: 0 horas,0 minutos,0 segundos,2 milesimos de segundos

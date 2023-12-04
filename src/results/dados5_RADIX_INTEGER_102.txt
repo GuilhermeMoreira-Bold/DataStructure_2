@@ -1,4 +1,0 @@
-[13805,3724,3945,5371,16190]
- Quatidade de comparacoes: 0
- Quatidade de movimentacoes: 160
- Tempo gasto na execucao: Elapsedtime: 0 horas,0 minutos,0 segundos,2 milesimos de segundos
