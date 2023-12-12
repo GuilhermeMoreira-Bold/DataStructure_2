@@ -42,7 +42,7 @@ public class Treetest6 {
             }
             if((number %= 5) == 0) {
                 avl.deleteElement(number);
-                redBlackTree.deleteNode(number);
+                redBlackTree.deleteElement(number);
             }
             System.out.println("All equal elements in AVL: " + avl.findAllEqualElements(number));
             System.out.println("All equal elements in redBlack: " + redBlackTree.findAllEqualElements(number));
