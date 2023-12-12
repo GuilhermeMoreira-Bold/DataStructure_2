@@ -5,9 +5,11 @@ import src.algorithms.SortingAlgorithm;
 import java.util.LinkedList;
 
 public class AVLTree<T extends  Comparable<T>> extends AbstractTree<T, AVLNode<T>> implements SortingAlgorithm<T> {
+    int size;
     public AVLTree(){
         super.root = null;
     }
+
     int height(AVLNode<T> node){
         if(node == null){
             return  0;
@@ -72,12 +74,14 @@ public class AVLTree<T extends  Comparable<T>> extends AbstractTree<T, AVLNode<T
         }
         insertRecursive(root,node);
         balance(node, data);
+        size++;
     }
 
     @Override
     public void deleteElement(T data) {
         deleteNode(root, data);
         balance(root, data);
+        size--;
     }
     public void printTree(String ident, boolean last){
         super.printTree(root, ident, last);

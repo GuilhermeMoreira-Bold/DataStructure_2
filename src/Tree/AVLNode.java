@@ -8,4 +8,12 @@ public class AVLNode <T extends Comparable<T>> extends Node<T, AVLNode<T>>{
         super.rightChild = null;
         height = 1;
     }
+
+    @Override
+    public String toString() {
+        return "AVLNode{" +
+                "height=" + height +
+                ", data=" + data +
+                '}';
+    }
 }

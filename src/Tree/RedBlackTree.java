@@ -1,9 +1,9 @@
 package src.Tree;
 
-public class RedBlackTree {
+public class RedBlackTree<T extends  Comparable<T>> extends AbstractTree<T, RedBlackNode<T>>  {
     private RedBlackNode root;
     private RedBlackNode TNULL;
-
+    long size;
     public RedBlackTree() {
         TNULL = new RedBlackNode();
         TNULL.color = 0;
@@ -35,11 +35,11 @@ public class RedBlackTree {
         }
     }
 
-    private RedBlackNode searchTreeHelper(RedBlackNode node, int key){
-        if(node == TNULL || key == node.data){
+    private RedBlackNode searchTreeHelper(RedBlackNode<T> node, T key){
+        if(node == TNULL || key.equals(node.data)){
             return  node;
         }
-        if(key < node.data){
+        if(key.compareTo(node.data) <  0){
             return  searchTreeHelper(node.left, key);
         }
         return searchTreeHelper(node.right, key);
@@ -111,15 +111,15 @@ public class RedBlackTree {
         v.parent = u.parent;
     }
 
-    private void deleteNodeHelper(RedBlackNode node, int key) {
+    private void deleteNodeHelper(RedBlackNode<T> node, T key) {
         RedBlackNode z = TNULL;
         RedBlackNode x, y;
         while (node != TNULL) {
-            if (node.data == key) {
+            if (node.data.equals(key)) {
                 z = node;
             }
 
-            if (node.data <= key) {
+            if (node.data.compareTo(key) <= 0) {
                 node = node.right;
             } else {
                 node = node.left;
@@ -127,12 +127,11 @@ public class RedBlackTree {
         }
 
         if (z == TNULL) {
-            System.out.println("Couldn't find key in the tree");
             return;
         }
 
         y = z;
-        int yOriginalColor = y.color;
+        long yOriginalColor = y.color;
         if (z.left == TNULL) {
             x = z.right;
             rbTransplant(z, z.right);
@@ -239,7 +238,7 @@ public class RedBlackTree {
         node.parent = node2;
     }
 
-    private void printHelper(RedBlackNode root, String indent, boolean last) {
+    private void prlongHelper(RedBlackNode root, String indent, boolean last) {
         if (root != TNULL) {
             System.out.print(indent);
             if (last) {
@@ -252,8 +251,8 @@ public class RedBlackTree {
 
             String sColor = root.color == 1 ? "RED" : "BLACK";
             System.out.println(root.data + "(" + sColor + ")");
-            printHelper(root.left, indent, false);
-            printHelper(root.right, indent, true);
+            prlongHelper(root.left, indent, false);
+            prlongHelper(root.right, indent, true);
         }
     }
 
@@ -270,7 +269,7 @@ public class RedBlackTree {
         postOrderHelper(this.root);
     }
 
-    public RedBlackNode searchTree(int k) {
+    public RedBlackNode searchTree(T k) {
         return searchTreeHelper(this.root, k);
     }
 
@@ -315,7 +314,7 @@ public class RedBlackTree {
         return y;
     }
 
-    public void insert(int key) {
+    public void insertRdb(long key) {
         RedBlackNode node = new RedBlackNode();
         node.parent = null;
         node.data = key;
@@ -328,7 +327,7 @@ public class RedBlackTree {
 
         while (x != TNULL) {
             y = x;
-            if (node.data < x.data) {
+            if (node.data.compareTo(x.data) < 0) {
                 x = x.left;
             } else {
                 x = x.right;
@@ -338,7 +337,7 @@ public class RedBlackTree {
         node.parent = y;
         if (y == null) {
             root = node;
-        } else if (node.data < y.data) {
+        } else if (node.data.compareTo(y.data) < 0) {
             y.left = node;
         } else {
             y.right = node;
@@ -354,14 +353,26 @@ public class RedBlackTree {
         }
 
         fixInsert(node);
+        size++;
     }
     public RedBlackNode getRoot() {
         return this.root;
     }
-    public void deleteNode(int data) {
-        deleteNodeHelper(this.root, data);
+    public void deleteNode(T data) {
+        deleteNodeHelper(this.root, data); size--;
     }
-    public void printTree() {
-        printHelper(this.root, "", true);
+        public void prlongTree() {
+        prlongHelper(this.root, "", true);
+    }
+
+    @Override
+    public void insert(T data) {
+        deleteNode(data);
+
+    }
+
+    @Override
+    public void deleteElement(T data) {
+        deleteNode(data);
     }
 }

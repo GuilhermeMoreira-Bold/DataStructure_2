@@ -16,6 +16,8 @@ public class TreeTest4 {
         System.out.println("\nAfter delet:");
         avlTest.inLevel();
 
+        System.out.println(avlTest.searchElement(349857).toString());
+
 
 
     }

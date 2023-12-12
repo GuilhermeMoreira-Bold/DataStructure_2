@@ -1,7 +1,7 @@
 package src.Tree;
 
 public abstract class  Node <T extends Comparable<T>, N extends Node<T, N>> implements Comparable<N>{
-    float x,y;
+
     T data;
     N leftChild;
     N  rightChild;

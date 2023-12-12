@@ -20,6 +20,7 @@ public class BinarySearchTree {
         this.root = null;
     }
 
+
     public NodeTree search(int data) {
         NodeTree current = new NodeTree(data);
         while (current.data != data) {

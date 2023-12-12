@@ -7,20 +7,40 @@ public abstract class AbstractTree<T extends Comparable<T>, N extends Node<T, N>
 private LinkedList <T> result = new LinkedList<>();
 
   N root;
-  public  N searchElement(T data){
-    N current = root;
-    while (current.data != null) {
-      if (current.data.equals(data)) {
-        return current;
-      } else if (current.data.compareTo(data) > 0) {
-        current = current.leftChild;
-      }else{
-        current = current.rightChild;
+    public  N searchElement(T data){
+      N current = root;
+      while (current != null) {
+        if (current.data.equals(data)) {
+          return current;
+        } else if (current.data.compareTo(data) > 0) {
+          current = current.leftChild;
+        }else{
+          current = current.rightChild;
+        }
       }
-    }
-    return null;
+      return null;
   };
+    public int findAllEqualElements(T element){
+      return findEqualElementsHelper(this.root, element);
+    }
+  private int findEqualElementsHelper(N current, T element) {
+    if (current == null) {
+      return 0;
+    }
 
+    int count = 0;
+
+    // Verifica o valor do nó atual
+    if (current.data.equals(element)) {
+      count++;
+    }
+
+    // Recursivamente chama a função para a subárvore esquerda e direita
+    count += findEqualElementsHelper(current.leftChild, element);
+    count += findEqualElementsHelper(current.rightChild, element);
+
+    return count;
+  }
   /**
    * Use insert to insert element's in the tree and add new logic
    *
@@ -162,5 +182,12 @@ private LinkedList <T> result = new LinkedList<>();
       printTree(currPtr.leftChild, indent, false);
       printTree(currPtr.rightChild, indent, true);
     }
+  }
+
+  @Override
+  public String toString() {
+    return "AbstractTree{" +
+            "data=" + root +
+            '}';
   }
 }

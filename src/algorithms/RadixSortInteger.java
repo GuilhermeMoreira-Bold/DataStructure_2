@@ -15,8 +15,7 @@ public class RadixSortInteger implements SortingAlgorithm<Integer>{
             if (number >= 0) {
                 positive.add(number);
             } else {
-                int complement = ~number + 1;
-                negative.add(complement);
+                negative.add(number);
             }
         }
     }
@@ -57,15 +56,8 @@ public class RadixSortInteger implements SortingAlgorithm<Integer>{
 
         ArrayList<Integer> sortedList = new ArrayList<>(lista.size());
         sortedList.addAll(radixDistribute(negative, 31));
-        Collections.reverse(sortedList);
         sortedList.addAll(radixDistribute(positive, 31));
 
-        LinkedList<Integer> result = new LinkedList<>(sortedList);
-
-        for (int i = 0; i < negative.size(); i++) {
-            result.set(i, ~result.get(i) + 1);
-        }
-
-        return result;
+        return new LinkedList<>(sortedList);
     }
 }

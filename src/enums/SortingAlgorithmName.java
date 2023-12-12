@@ -1,6 +1,5 @@
 package src.enums;
 
-import java.util.Comparator;
 import java.util.LinkedList;
 
 import src.Tree.AVLTree;
@@ -73,6 +72,19 @@ public enum SortingAlgorithmName {
             return null;
         }
     },
+    VOID_QUICK_SORT_ALGORITHM_BOOK {
+        @Override
+        public <T> LinkedList<T> useAlgorithm(LinkedList<T> list) {
+            Quick quick = new Quick();
+            return  (LinkedList<T>) quick.sort((LinkedList<Long>) list);
+        }
+
+        @Override
+        public String algorithmName() {
+            return "QuicksortOriginal";
+        }
+    },
+
     VOID_RADIX_ORIGINAL(){
         @Override
         public <T> LinkedList<T> useAlgorithm(LinkedList<T> list) {
@@ -97,10 +109,10 @@ public enum SortingAlgorithmName {
             return "RADIX_INTEGER";
         }
     },
-    VOID_RADIX_SORT_BINARY(){
+    VOID_ORBIT_SORT(){
         @Override
         public <T> LinkedList<T> useAlgorithm(LinkedList<T> list){
-            RadixSort sort = new RadixSort();
+            OrbitSort sort = new OrbitSort();
             return (LinkedList<T>) sort.sort((LinkedList<Long>) list);
         }
 

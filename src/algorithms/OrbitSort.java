@@ -3,14 +3,13 @@ package src.algorithms;
 import src.controller.Movimentacoes;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 
-public class RadixSort implements SortingAlgorithm<Long>{
+public class OrbitSort implements SortingAlgorithm<Long>{
     private ArrayList<Long> positive = new ArrayList<>();
     private ArrayList<Long> negative = new ArrayList<>();
 
-    private void radixHelper(LinkedList<Long> list) {
+    private void orbitHelper(LinkedList<Long> list) {
         for (Long number : list) {
             if (number >= 0) {
                 positive.add(number);
@@ -20,7 +19,7 @@ public class RadixSort implements SortingAlgorithm<Long>{
         }
     }
 
-    private ArrayList<Long> radixDistribute(ArrayList<Long> list, int bitIndex) {
+    private ArrayList<Long> orbitDistribute(ArrayList<Long> list, int bitIndex) {
         if (list.isEmpty() || bitIndex < 0) {
             return list;
         }
@@ -32,16 +31,16 @@ public class RadixSort implements SortingAlgorithm<Long>{
             long mask = 1L << bitIndex;
             if ((number & mask) == 0) {
                 bucketZero.add(number);
-//                Movimentacoes.movimentou();
+               Movimentacoes.movimentou();
             } else {
                 bucketOne.add(number);
-//                Movimentacoes.movimentou();
+                Movimentacoes.movimentou();
             }
         }
 
         ArrayList<Long> newOrders = new ArrayList<>();
-        newOrders.addAll(radixDistribute(bucketZero, bitIndex - 1));
-        newOrders.addAll(radixDistribute(bucketOne, bitIndex - 1));
+        newOrders.addAll(orbitDistribute(bucketZero, bitIndex - 1));
+        newOrders.addAll(orbitDistribute(bucketOne, bitIndex - 1));
 
         return newOrders;
     }
@@ -52,17 +51,12 @@ public class RadixSort implements SortingAlgorithm<Long>{
             throw new IllegalArgumentException("A lista de entrada não pode ser nula.");
         }
 
-        radixHelper(lista);
+        orbitHelper(lista);
 
         ArrayList<Long> sortedList = new ArrayList<>(lista.size());
-        sortedList.addAll(radixDistribute(negative, 63));
-        sortedList.addAll(radixDistribute(positive, 63));
+        sortedList.addAll(orbitDistribute(negative, 63));
+        sortedList.addAll(orbitDistribute(positive, 63));
 
-        LinkedList<Long> result = new LinkedList<>(sortedList);
-
-
-
-
-        return result;
+        return new LinkedList<>(sortedList);
     }
 }
